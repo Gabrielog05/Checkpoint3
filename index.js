@@ -7,36 +7,53 @@ function Alunos(nome, qtdeFaltas, notas){
     this.qtdeFaltas = qtdeFaltas;
     this.notas = notas;    
     
-    this.media = function calcularMedia (notas) {       
+    this.calcularMedia = function (notas) {       
         let sum = 0;
         for(let i = 0; i < this.notas.length; i++) {
-            sum += this.notas[i]; // [i] a posição do array é a msma da do contador.
-            
+            sum += this.notas[i]; // [i] a posição do array é a msma da do contador.            
         }
         return (sum / this.notas.length);
     }
 }
 
-const Frodo = new Alunos('Frodo', 1,[5,9,5]);
+const Frodo = new Alunos('Frodo', 1,[5,6,7]);
 const Sauron = new Alunos('Sauron', 0,[10,9,9]);
-const Gandalf = new Alunos('Gandalf', 0,[10,10,10]);
+const Gandalf = new Alunos('Gandalf', 3,[10,10,10]);
 
 let Curso = {
-   nome: 'Bebidas e Poçoes Mágicas',
+   nome: 'Rumo ao núcleo de Mordor',
    aprovacao: 7,
    faltasMax: 5,
    listaAlunos: [Frodo,Sauron,Gandalf],
-
     addAluno(nome, qtdeFaltas, notas) {
         let novoAluno = new Alunos(nome,qtdeFaltas,notas);
         this.listaAlunos.push(novoAluno);
-   }
-}
+   },
+    status(aluno) {
+        for(let i = 0; i < this.listaAlunos.notas; i++){  
+                 aluno = this.listaAlunos[i];  
+                 console.log(aluno);
+                // if (aluno.calcularMedia() < this.aprovacao){
+                //     console.log('Reprovado!')
+                // }
+                // else if(aluno.calcularMedia() >= this.aprovacao) {
+                //     console.log('Aprovado');
+                // }
+                
+            }
+        }
+    }
 
-Curso.addAluno('Legolas', 5, [5,9,9]);
-console.log(Frodo.media());
-console.log(Sauron.notas);
-console.log(Curso.listaAlunos);
+Curso.addAluno('Legolas',3,[9,7,10]);
+console.log(Curso.status());
+
+
+
+
+
+
+
+
 
 
 

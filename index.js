@@ -21,20 +21,18 @@ function Alunos(nome, qtdeFaltas, notas){
             sum += this.notas[i]; // [i] a posição do array é a msma da do contador.            
         }
         return (sum / this.notas.length);
-    }
+    },
     this.faltas = function (){
-       let falta = 0;
         for(let i = 0; i < this.length; i++)  {
           let aluno = this.length[i];
-                if(aluno.notas == 0){ //considera que, se o aluno zerou a prova, acrescenta uma falta.
-                    falta + 1;            
-                }
-        return (aluno.qtdeFaltas + falta);
-       }
+                if(aluno.notas.length == 0){ //considera que, se o aluno zerou a prova, acrescenta uma falta.
+                    aluno.qtdeFaltas + 1;
+                } else {}        
+       } return aluno.qtdeFaltas;
     }
 }
 
-const Frodo = new Alunos('Frodo', 1,[8,0,8]);
+const Frodo = new Alunos('Frodo', 5,[8,0,8]);
 const Sauron = new Alunos('Sauron', 6,[10,10,10]);
 
                                                                          
@@ -48,37 +46,29 @@ let Curso = {
         this.listaAlunos.push(novoAluno);
    },
     status(aluno) {
+        let aprovados = [];
         const criterio = (this.aprovacao * 0.1);
         for(let i = 0; i < this.listaAlunos.length; i++){  
             aluno = this.listaAlunos[i];  
                 if((aluno.calcularMedia() >= this.aprovacao) && (aluno.qtdeFaltas < this.faltasMax)){
-                    console.log('Aprovado nota e presença! ');
+                    aprovados.push(true);
+                    console.log('Aprovado nota e presença! ' + aluno.nome);
             }
                 else if (aluno.calcularMedia() > (criterio) && (aluno.qtdeFaltas == this.faltasMax)){
-                    console.log('Aprovado no criterio! ');
+                    aprovados.push(true);
+                    console.log('Aprovado no criterio! ' + aluno.nome);
             }
                 else if((aluno.calcularMedia() < this.aprovacao) || (aluno.qtdeFaltas > this.faltasMax)){
-                    console.log('Reprovado por nota ou falta! ');
+                    aprovados.push(false)
+                    console.log('Reprovado por nota ou falta! ' + aluno.nome);
             }
-        } return aluno.aprovacao;
+        } return aprovados;
     },
-    statusBoolean(){ 
-        let aluno = 0;
-        for(let i = 0; i <this.listaAlunos.length; i++){
-            aluno = this.listaAlunos[i];
-                if(aluno.calcularMedia > this.aprovacao){
-                    return true;
-            } 
-                else if(aluno.calcularMedia < this.aprovacao){
-                    return false;
-            }
-        } return aluno.aprovacao;
-    }
+
 }
 
 Curso.addAluno('Legolas ',0,[9,7,10]);
 Curso.addAluno('Bilbo ', 2,[1,3,5]);
-console.log(Curso(Frodo));
-
+console.log(Curso.status());
 
 
